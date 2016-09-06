@@ -533,7 +533,7 @@ class Gateway
 		ksort($requestParams);
 		$signData = implode('|', $requestParams);
 		$key = self::getConfig('provider.key');
-		$localSign = base64_encode(hash_hmac('sha1', $signData, $key));
+		$localSign = base64_encode(hash_hmac('sha1', $signData, $key, true));
 
 		return $sign == $localSign;
 
