@@ -296,6 +296,7 @@ class Gateway
 		// код ответа от гейта
 		$code = $oResponse->response->result_code;
 		if ($code != 0) {
+			$this->resultCode = $code;
 			$this->setError($this->errorMap[$code]);
 
 			return;
