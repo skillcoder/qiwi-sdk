@@ -16,6 +16,7 @@ class Gateway
 	private $errorMessage;
 	private $billStatus;
 	private $payReturnStatus;
+	private $callbackParam;
 
 	const C_ERROR_FORMAT = '5';
 	const C_ERROR_SERVER_BUSY = '13';
@@ -363,6 +364,9 @@ class Gateway
 		// данные
 		$this->setCallbackAmount($params['amount']);
 		$this->setCallbackOrderId($params['bill_id']);
+		
+		// Все параметры
+		$this->setCallbackParam($params);
 
 		// ответ
 		$this->createCallbackResponse();
@@ -610,6 +614,27 @@ class Gateway
 	{
 		$this->callbackAmount = $amount;
 	}
+	
+	/**
+	 * Все актальные параметры Колбека
+	 *
+	 * @return array
+	 */
+	public function getCallbackParam()
+	{
+		return $this->callbackParam;
+	}
+
+	/**
+	 * Все актальные параметры Колбека
+	 *
+	 * @param array $param
+	 */
+	private function setCallbackParam($param)
+	{
+		$this->callbackParam = $param;
+	}
+
 
 	/**
 	 * Идентификатор счета/заказа
