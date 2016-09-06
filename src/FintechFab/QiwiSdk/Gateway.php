@@ -53,6 +53,13 @@ class Gateway
 	 * @var string
 	 */
 	private $callbackResponse;
+	
+	/**
+	 * Код ответа для коллбека киви
+	 *
+	 * @var int
+	 */
+	private $resultCode;
 
 	/**
 	 * сумма счета/заказа
@@ -546,6 +553,7 @@ class Gateway
 	 */
 	public function createCallbackResponse($code = 0)
 	{
+		$this->resultCode = $code;
 		$this->callbackResponse = '<?xml version="1.0"?><result><result_code>' . $code . '</result_code></result>';
 	}
 
@@ -557,6 +565,16 @@ class Gateway
 	public function getCallbackResponse()
 	{
 		return $this->callbackResponse;
+	}
+
+	/**
+	 * Код ответа
+	 *
+	 * @return int
+	 */
+	public function getResultCode()
+	{
+		return $this->resultCode;
 	}
 
 	/**
