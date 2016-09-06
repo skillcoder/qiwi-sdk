@@ -75,6 +75,13 @@ class Gateway
 	 * @var string
 	 */
 	private $callbackOrderId;
+	
+	/**
+	 * Объект счёта
+	 *
+	 * @var object
+	 */
+	private $bill;
 
 
 	public function __construct(Curl $curl)
@@ -139,6 +146,8 @@ class Gateway
 		if ($this->getError()) {
 			return false;
 		}
+
+		$this->bill = $oResponse->response->bill;
 
 		$status = $oResponse->response->bill->status;
 		$this->setValueBillStatus($this->statusMap[$status]);
@@ -569,6 +578,16 @@ class Gateway
 	public function getCallbackResponse()
 	{
 		return $this->callbackResponse;
+	}
+	
+	/**
+	 * Данные счёта
+	 *
+	 * @return object
+	 */
+	public function getBill()
+	{
+		return $this->bill;
 	}
 
 	/**
